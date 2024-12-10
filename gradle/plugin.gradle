@@ -12,7 +12,5 @@ dependencies {
     compile project(':PluginConfigProcessor')
     kapt project(':PluginConfigProcessor')
 }
-sourceCompatibility = "1.8"
-targetCompatibility = "1.8"
 
 apply from: rootProject.file('gradle/publish.gradle')

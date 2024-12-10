@@ -17,6 +17,4 @@ dependencies {
     compile("com.bytedance.android.build:gradle-compat-api:$gradle_compat_version")
 }
 
-sourceCompatibility = "1.8"
-targetCompatibility = "1.8"
 apply from: rootProject.file('gradle/publish.gradle')

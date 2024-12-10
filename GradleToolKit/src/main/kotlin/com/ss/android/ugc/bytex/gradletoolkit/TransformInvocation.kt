@@ -1,9 +1,9 @@
 package com.ss.android.ugc.bytex.gradletoolkit
 
 import com.android.build.api.transform.TransformInvocation
+import com.android.build.gradle.AppExtension
+import com.android.build.gradle.LibraryExtension
 import com.android.build.gradle.api.BaseVariant
-import com.bytedance.gradle.compat.extension.project
-import com.bytedance.gradle.compat.extension.variant
 import org.gradle.api.Project
 
 /**
@@ -14,4 +14,16 @@ val TransformInvocation.project: Project
 
 
 val TransformInvocation.variant: BaseVariant
-    get() = variant.raw()
+    get() = project.extensions.getByName("android").let { android ->
+        this.context.variantName.let { variant ->
+            when (android) {
+                is AppExtension -> when {
+                    variant.endsWith("AndroidTest") -> android.testVariants.single { it.name == variant }
+                    variant.endsWith("UnitTest") -> android.unitTestVariants.single { it.name == variant }
+                    else -> android.applicationVariants.single { it.name == variant }
+                }
+                is LibraryExtension -> android.libraryVariants.single { it.name == variant }
+                else -> TODO("variant not found")
+            }
+        }
+    }
