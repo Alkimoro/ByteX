@@ -19,8 +19,8 @@ internal val BaseVariant.bridgeMergedRes: Collection<File>
 internal val BaseVariant.bridgeMergedManifests: Collection<File>
     get() = if (ANDROID_GRADLE_PLUGIN_VERSION.major == 3 && ANDROID_GRADLE_PLUGIN_VERSION.minor == 4) {
         listOf(when (this) {
-            is ApplicationVariant -> File(InternalArtifactType.MERGED_MANIFESTS.getOutputDir(scope.globalScope.buildDir), name)
-            is LibraryVariant -> File(InternalArtifactType.LIBRARY_MANIFEST.getOutputDir(scope.globalScope.buildDir), name)
+            is ApplicationVariant -> File(InternalArtifactType.MERGED_MANIFESTS.getOutputDir(scope.buildDir()), name)
+            is LibraryVariant -> File(InternalArtifactType.LIBRARY_MANIFEST.getOutputDir(scope.buildDir()), name)
             else -> throw IllegalArgumentException(this.name)
         })
     } else {

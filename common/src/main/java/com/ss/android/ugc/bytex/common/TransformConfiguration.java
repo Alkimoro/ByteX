@@ -9,6 +9,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.ss.android.ugc.bytex.common.utils.ReflectionUtils;
+import com.ss.android.ugc.bytex.gradletoolkit.VariantScopeDelegate;
 
 import java.io.File;
 import java.util.Collection;
@@ -50,7 +51,7 @@ public interface TransformConfiguration {
      * Returns the scope(s) of the Transform. This indicates which scopes the handle consumes.
      */
     @NonNull
-    default Set<? super QualifiedContent.Scope> getScopes(@Nullable VariantScope variantScope) {
+    default Set<? super QualifiedContent.Scope> getScopes(@Nullable VariantScopeDelegate variantScope) {
         try {
             if (variantScope == null || this.getClass().getMethod("getScopes").getDeclaringClass() != TransformConfiguration.class) {
                 return getScopes();
@@ -91,7 +92,7 @@ public interface TransformConfiguration {
      * <p>The default implementation returns an empty Set.
      */
     @NonNull
-    default Set<? super QualifiedContent.Scope> getReferencedScopes(@Nullable VariantScope variantScope) {
+    default Set<? super QualifiedContent.Scope> getReferencedScopes(@Nullable VariantScopeDelegate variantScope) {
         try {
             if (variantScope == null || this.getClass().getMethod("getReferencedScopes").getDeclaringClass() != TransformConfiguration.class) {
                 return getReferencedScopes();

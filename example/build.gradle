@@ -1,4 +1,4 @@
-return
+
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
@@ -19,20 +19,22 @@ buildscript {
         enableMinify = true
     }
     dependencies {
-        classpath "com.bytedance.android.byteX:base-plugin:${plugin_version}"
-        classpath "com.bytedance.android.byteX:access-inline-plugin:${plugin_version}"
-        classpath "com.bytedance.android.byteX:shrink-r-plugin:${plugin_version}"
-        classpath "com.bytedance.android.byteX:refer-check-plugin:${plugin_version}"
-        classpath "com.bytedance.android.byteX:getter-setter-inline-plugin:${plugin_version}"
-        classpath "com.bytedance.android.byteX:const-inline-plugin:${plugin_version}"
-        classpath "com.bytedance.android.byteX:field-assign-opt-plugin:${plugin_version}"
-        classpath "com.bytedance.android.byteX:closeable-check-plugin:${plugin_version}"
-        classpath "com.bytedance.android.byteX:method-call-opt-plugin:${plugin_version}"
-        classpath "com.bytedance.android.byteX:serialization-check-plugin:${plugin_version}"
-        classpath "com.bytedance.android.byteX:SourceFileKiller:${plugin_version}"
-        classpath "com.bytedance.android.byteX:coverage-lib:${plugin_version}"
-        classpath "com.bytedance.android.byteX:coverage-plugin:${plugin_version}"
-        classpath "com.bytedance.android.byteX:butterknife-check-plugin:${plugin_version}"
+        def test_plugin_version = "0.3.0"
+
+        classpath "com.bytedance.android.byteX:base-plugin:${test_plugin_version}"
+        classpath "com.bytedance.android.byteX:access-inline-plugin:${test_plugin_version}"
+        classpath "com.bytedance.android.byteX:shrink-r-plugin:${test_plugin_version}"
+        classpath "com.bytedance.android.byteX:refer-check-plugin:${test_plugin_version}"
+        classpath "com.bytedance.android.byteX:getter-setter-inline-plugin:${test_plugin_version}"
+        classpath "com.bytedance.android.byteX:const-inline-plugin:${test_plugin_version}"
+        classpath "com.bytedance.android.byteX:field-assign-opt-plugin:${test_plugin_version}"
+        classpath "com.bytedance.android.byteX:closeable-check-plugin:${test_plugin_version}"
+        classpath "com.bytedance.android.byteX:method-call-opt-plugin:${test_plugin_version}"
+        classpath "com.bytedance.android.byteX:serialization-check-plugin:${test_plugin_version}"
+        classpath "com.bytedance.android.byteX:SourceFileKiller:${test_plugin_version}"
+        classpath "com.bytedance.android.byteX:coverage-lib:${test_plugin_version}"
+        classpath "com.bytedance.android.byteX:coverage-plugin:${test_plugin_version}"
+        classpath "com.bytedance.android.byteX:butterknife-check-plugin:${test_plugin_version}"
     }
 }
 

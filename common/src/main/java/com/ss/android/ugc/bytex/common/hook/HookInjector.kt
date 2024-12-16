@@ -4,7 +4,6 @@ import com.android.build.api.transform.*
 import com.android.build.gradle.AppExtension
 import com.android.build.gradle.internal.pipeline.TransformInvocationBuilder
 import com.android.build.gradle.internal.pipeline.TransformTask
-import com.bytedance.gradle.compat.extension.HookContext
 import com.google.common.collect.Lists
 import com.ss.android.ugc.bytex.common.IPlugin
 import com.ss.android.ugc.bytex.common.hook.TransformInputCompatUtil.covertToTransformInput
@@ -186,10 +185,7 @@ internal sealed class HookInjector(project: Project) {
                 }
             }
             //模拟创建Transform的context对象用于构建TransformInvocation
-            val context = object : HookContext {
-                //gradle compat 需要反射字段获取 task ，如果被 hook 了就会报错，这里直接让 compat 库
-                //暴露一个接口，让它主动查询这是个 hook 的类，然后直接获取 task 而不是反射
-                override val hookTask: Task = task
+            val context = object : Context {
                 //for context.project
                 val project = task.project
                 override fun getPath(): String = task.path
@@ -203,7 +199,7 @@ internal sealed class HookInjector(project: Project) {
                 override fun getContentLocation(name: String, types: MutableSet<QualifiedContent.ContentType>, scopes: MutableSet<in QualifiedContent.Scope>, format: Format): File {
                     //对于Hook方式，我们原样覆盖，如果name不是来自之前的输入的absolutePath不合法，我们抛一个异常出去
                     return inputs.firstOrNull { it.absolutePath == name }
-                            ?: throw IllegalArgumentException("Can Not getContentLocation From Name:${name}")
+                        ?: throw IllegalArgumentException("Can Not getContentLocation From Name:${name}")
                 }
 
                 override fun deleteAll() {

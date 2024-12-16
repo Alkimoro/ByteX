@@ -119,7 +119,7 @@ public class JarCache extends FileCache {
                     } else if (outputs.getIdentify() != mapToEntry.getIdentify()) {
                         reason = "content changed:" + outputs.getIdentify() + "->" + mapToEntry.getIdentify();
                     }
-                    System.out.println("ByteX outputJar:" + getFile().getAbsolutePath() + "->" + outputFile.getAbsolutePath() + ":reason:" + reason);
+                    //System.out.println("ByteX outputJar:" + getFile().getAbsolutePath() + "->" + outputFile.getAbsolutePath() + ":reason:" + reason);
                     try (JarOutputStream jos = new JarOutputStream(new BufferedOutputStream(new FileOutputStream(outputFile)))) {
                         for (FileData item : dataList) {
                             for (FileData file : item.allFiles()) {

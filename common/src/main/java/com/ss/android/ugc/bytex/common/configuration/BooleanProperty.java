@@ -21,7 +21,7 @@ public enum BooleanProperty implements Property<Boolean> {
     CHECK_TRAVERSE_MODIFY("bytex.check_traverse_modify", true),
     CHECK_DEBUG_TRAVERSE_MODIFY("bytex.check_debug_traverse_modify", false),
     ENABLE_BUILD_RECORDER("bytex.enable_build_recorder", true),
-    ENABLE_GRADLE_DAEMON_IGNORE_CLASSLOADER_SINGLETON("bytex.enable_gradle_daemon_ignore_classloader_singleton", true);
+    ENABLE_GRADLE_DAEMON_IGNORE_CLASSLOADER_SINGLETON("bytex.enable_gradle_daemon_ignore_classloader_singleton", false);
 
     @NonNull
     private final String propertyName;

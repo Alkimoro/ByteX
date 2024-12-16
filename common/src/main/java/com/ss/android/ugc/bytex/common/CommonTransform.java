@@ -20,6 +20,7 @@ import com.ss.android.ugc.bytex.common.log.Timer;
 import com.ss.android.ugc.bytex.common.log.html.HtmlReporter;
 import com.ss.android.ugc.bytex.common.utils.HeapDumper;
 import com.ss.android.ugc.bytex.gradletoolkit.ProjectKt;
+import com.ss.android.ugc.bytex.gradletoolkit.VariantScopeDelegate;
 import com.ss.android.ugc.bytex.transformer.TransformContext;
 import com.ss.android.ugc.bytex.transformer.TransformOptions;
 
@@ -62,7 +63,7 @@ public abstract class CommonTransform<X extends BaseContext> extends Transform {
     }
 
     @Nullable
-    private VariantScope getApplyingVariantScope() {
+    private VariantScopeDelegate getApplyingVariantScope() {
         return applyingVariantName == null ? null : ProjectKt.findVariantScope(context.project, applyingVariantName);
     }
 
@@ -84,7 +85,7 @@ public abstract class CommonTransform<X extends BaseContext> extends Transform {
     @Override
     public Set<? super QualifiedContent.Scope> getScopes() {
         Set<? super QualifiedContent.Scope> result = ImmutableSet.of();
-        VariantScope variantScope = getApplyingVariantScope();
+        VariantScopeDelegate variantScope = getApplyingVariantScope();
         for (TransformConfiguration config : getConfigurations()) {
             Set<? super QualifiedContent.Scope> scopes = config.getScopes(variantScope);
             if (!result.containsAll(scopes)) {
@@ -115,7 +116,7 @@ public abstract class CommonTransform<X extends BaseContext> extends Transform {
     @Override
     public Set<? super QualifiedContent.Scope> getReferencedScopes() {
         Set<? super QualifiedContent.Scope> result = super.getReferencedScopes();
-        VariantScope variantScope = getApplyingVariantScope();
+        VariantScopeDelegate variantScope = getApplyingVariantScope();
         for (TransformConfiguration config : getConfigurations()) {
             Set<? super QualifiedContent.Scope> referencedScopes = config.getReferencedScopes(variantScope);
             if (!result.containsAll(referencedScopes)) {

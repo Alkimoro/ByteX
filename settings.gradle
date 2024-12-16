@@ -52,4 +52,8 @@ project(':coverage-plugin').projectDir = new File('coverage/coverage-plugin')
 include ':coverage-lib'
 project(':coverage-lib').projectDir = new File('coverage/coverage-lib')
 
+include ':refer-check-test'
+project(':refer-check-test').projectDir = new File('refer-check-test-sdk')
+
+
 //pull request

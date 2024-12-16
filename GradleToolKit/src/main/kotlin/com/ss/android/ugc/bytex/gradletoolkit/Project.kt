@@ -8,12 +8,12 @@ import org.gradle.api.Project
 
 //todo:fix me
 val revision = Revision.parseRevision(Version.ANDROID_GRADLE_PLUGIN_VERSION)
-fun Project.findVariantScope(variantName: String): VariantScope? {
+fun Project.findVariantScope(variantName: String): VariantScopeDelegate? {
     return findVariantManager().findVariantScope(variantName)
 }
 
 
-fun Project.findVariantManager(): VariantManager {
+private fun Project.findVariantManager(): VariantManager {
     return if (revision.major > 3 || revision.minor >= 6) {
         findVariantManager36()
     } else {
@@ -31,13 +31,17 @@ private fun Project.findVariantManager36(): VariantManager {
     }
 }
 
-fun VariantManager.findVariantScope(variantName: String): VariantScope? {
-    return if (revision.major < 4) {
-        findVariantScope3X(variantName)
+private fun VariantManager.findVariantScope(variantName: String): VariantScopeDelegate? {
+    return if (revision.major >= 8) {
+        throw Exception("current AGP version is unsupported")
+    } else if (revision.major >= 7 && revision.minor >= 4) {
+        V74VariantScope.findVariantScope(this, variantName)
+    } else if (revision.major < 4) {
+        findVariantScope3X(variantName)?.let { LowVersionVariantScope(it) }
     } else if (revision.minor == 0) {
-        findVariantScope40(variantName)
+        findVariantScope40(variantName)?.let { LowVersionVariantScope(it) }
     } else {
-        findVariantScope41(variantName)
+        findVariantScope41(variantName)?.let { LowVersionVariantScope(it) }
     }
 }
 

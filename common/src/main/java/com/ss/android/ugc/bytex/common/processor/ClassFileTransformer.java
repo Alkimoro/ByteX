@@ -50,7 +50,7 @@ public class ClassFileTransformer extends MainProcessFileHandler {
                 }
             }
             ClassReader cr = new ClassReader(raw);
-            ClassWriter cw = new ClassWriter(cwFlags);
+            ClassWriter cw = new ClassWriter(cr, cwFlags);
             ClassVisitorChain chain = getClassVisitorChain(relativePath);
             if (needPreVerify) {
                 chain.connect(new AsmVerifyClassVisitor());
