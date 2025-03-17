@@ -50,6 +50,7 @@ public class GraphBuilder {
                         && !"module-info".equals(current.entity.name)
                         && !"retrofit2/DefaultMethodSupport".equals(current.entity.name)
                         && !current.entity.name.startsWith("kotlin/reflect/")
+                        && !current.entity.name.startsWith("org/bouncycastle/jcajce/")
                 ) {
                     throw new DuplicateClassException(msg);
                 } else {
