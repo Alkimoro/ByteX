@@ -49,6 +49,7 @@ public class GraphBuilder {
                 if (BooleanProperty.ENABLE_DUPLICATE_CLASS_CHECK.value()
                         && !"module-info".equals(current.entity.name)
                         && !"retrofit2/DefaultMethodSupport".equals(current.entity.name)
+                        && !current.entity.name.startsWith("kotlin/reflect/")
                 ) {
                     throw new DuplicateClassException(msg);
                 } else {
